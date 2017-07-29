@@ -1,10 +1,10 @@
 div#chat_viewport {
   font-family: Verdana, Arial, sans-serif;
-  padding: 5px;
+  padding: 20px;
   border-top: 2px dashed #585858;
   min-height: 300px;
   color: black;
-  max-height: 650px;
+  max-height: 300px;
   overflow: auto;
   margin-bottom: 10px;
   width: 750px;

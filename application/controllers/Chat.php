@@ -28,6 +28,11 @@ class Chat extends CI_Controller
         $this->template->load('template/chat', 'chat/index', $this->view_data);
     }
 
+    public function video()
+    {
+        $this->load->view('chat/video');
+    }
+
     /**
      * Ajax Add Chat Message
      */

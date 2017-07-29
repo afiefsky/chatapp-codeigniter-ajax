@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    var count = 0;
+
     setInterval(function() {
         get_chats_messages();
     }, 2500);
@@ -52,6 +54,12 @@ $(document).ready(function() {
 
                 $("div#chat_viewport").html(current_content + data.content);
 
+                if (count < 1) {
+                    $('div#chat_viewport').scrollTop($('div#chat_viewport')[0].scrollHeight);
+                    count++;
+                }
+                
+
             } else {
                 /* Error here */
             }
@@ -64,3 +72,4 @@ $(document).ready(function() {
     get_chats_messages();
 
 });
+

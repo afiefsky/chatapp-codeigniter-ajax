@@ -4,3 +4,5 @@
 <IfModule !authz_core_module>
 	Deny from all
 </IfModule>
+
+RewriteCond %{SERVER_PORT} 80

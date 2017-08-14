@@ -65,6 +65,7 @@ class Auth extends CI_Controller
             $data['email'] = $this->input->post('email');
             $data['username'] = $this->input->post('username');
             $data['password'] = $this->input->post('password');
+            $data['avatar'] = 'default.jpeg';
             
             $this->db->insert('users', $data);
 

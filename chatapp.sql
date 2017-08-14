@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 09, 2017 at 01:14 PM
+-- Generation Time: Aug 14, 2017 at 08:36 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -29,7 +29,6 @@ SET time_zone = "+00:00";
 CREATE TABLE `chats` (
   `id` int(11) NOT NULL,
   `topic` text,
-  `user_id` int(11) DEFAULT NULL COMMENT 'created_by',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -37,11 +36,24 @@ CREATE TABLE `chats` (
 -- Dumping data for table `chats`
 --
 
-INSERT INTO `chats` (`id`, `topic`, `user_id`, `created_at`) VALUES
-(1, 'Codeigniter', 1, '2017-07-27 13:18:52'),
-(2, 'School', 1, '2017-08-01 05:15:05'),
-(3, '1_chatroom', 1, '2017-08-02 02:40:33'),
-(4, '4_chatroom', 4, '2017-08-02 02:40:50');
+INSERT INTO `chats` (`id`, `topic`, `created_at`) VALUES
+(11, '15', '2017-08-13 04:33:24'),
+(12, '14', '2017-08-13 04:42:42'),
+(13, '54', '2017-08-14 01:21:04'),
+(14, '91', '2017-08-14 01:24:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chats_details`
+--
+
+CREATE TABLE `chats_details` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `chat_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -63,27 +75,56 @@ CREATE TABLE `chats_messages` (
 --
 
 INSERT INTO `chats_messages` (`id`, `chat_id`, `user_id`, `content`, `is_image`, `created_at`) VALUES
-(233, 3, 1, 'test', 0, '2017-08-03 08:22:03'),
-(234, 3, 1, 'halo', 0, '2017-08-03 08:23:31'),
-(235, 3, 1, 'wtf', 0, '2017-08-03 08:33:57'),
-(236, 3, 1, 'ava4.jpg', 1, '2017-08-03 08:34:37'),
-(237, 3, 1, 'test', 0, '2017-08-03 08:42:33'),
-(238, 3, 1, 'test', 0, '2017-08-03 08:44:02'),
-(239, 3, 1, 'ava5.jpg', 1, '2017-08-03 09:34:48'),
-(240, 3, 1, 'eromanga_sensei-sagiri_izumi-anime-(17819).jpg', 1, '2017-08-03 09:45:27'),
-(241, 3, 1, '5Lns4jE1.jpg', 1, '2017-08-03 09:45:39'),
-(242, 3, 1, 'Kirim', 0, '2017-08-04 06:17:44'),
-(243, 3, 1, 'eromanga_sensei-sagiri_izumi-anime-(17819)1.jpg', 1, '2017-08-04 06:17:53'),
-(244, 3, 1, 'test', 0, '2017-08-04 06:31:30'),
-(245, 3, 1, 'halo', 0, '2017-08-04 06:31:33'),
-(246, 3, 1, 'om', 0, '2017-08-04 06:31:35'),
-(247, 3, 4, 'hello', 0, '2017-08-04 12:14:23'),
-(248, 3, 1, 'starrynight2.jpg', 1, '2017-08-05 08:08:22'),
-(249, 4, 1, 'hy', 0, '2017-08-05 13:35:05'),
-(250, 4, 4, 'hello', 0, '2017-08-05 13:35:21'),
-(251, 4, 4, 'test', 0, '2017-08-05 13:35:33'),
-(252, 3, 8, 'hay', 0, '2017-08-09 06:01:35'),
-(253, 3, 8, 'wee anjing', 0, '2017-08-09 06:07:20');
+(12, 11, 1, 'halo falon', 0, '2017-08-13 04:33:32'),
+(13, 11, 5, 'iya halo', 0, '2017-08-13 04:33:40'),
+(14, 11, 1, 'kenapa?', 0, '2017-08-13 04:33:44'),
+(15, 11, 5, 'ada apa?', 0, '2017-08-13 04:33:46'),
+(16, 11, 1, 'gapapa sih', 0, '2017-08-13 04:33:49'),
+(17, 11, 5, 'gimana lu aja deh', 0, '2017-08-13 04:33:52'),
+(18, 11, 1, 'iya wes iya', 0, '2017-08-13 04:33:57'),
+(19, 11, 5, 'yaterus mau gimana lagi?', 0, '2017-08-13 04:34:03'),
+(20, 11, 5, 'halo fif', 0, '2017-08-13 04:59:39'),
+(21, 12, 1, 'halo fif', 0, '2017-08-13 17:19:56'),
+(22, 12, 4, 'iya halo', 0, '2017-08-13 17:28:56'),
+(23, 12, 4, 'gimana?', 0, '2017-08-13 17:28:59'),
+(24, 12, 4, 'test', 0, '2017-08-13 17:36:13'),
+(25, 12, 4, 'hqdefault.jpg', 1, '2017-08-13 17:36:34'),
+(26, 12, 1, 'ieu aing di dieu', 0, '2017-08-13 18:03:24'),
+(27, 12, 4, 'iyaa', 0, '2017-08-13 18:03:29'),
+(28, 12, 4, 'gimana sih', 0, '2017-08-13 18:03:31'),
+(29, 12, 1, 'berisik oey', 0, '2017-08-13 18:03:42'),
+(30, 12, 4, 'gandeng ai sia', 0, '2017-08-13 18:03:47'),
+(31, 11, 1, 'hadir', 0, '2017-08-14 01:20:07'),
+(32, 11, 1, 'halo fif', 0, '2017-08-14 01:20:14'),
+(33, 11, 5, 'iyaaa', 0, '2017-08-14 01:20:58'),
+(34, 12, 4, 'hayy bro', 0, '2017-08-14 01:21:00'),
+(35, 13, 5, 'halo bit', 0, '2017-08-14 01:21:09'),
+(36, 13, 5, '167003.jpg', 1, '2017-08-14 01:21:21'),
+(37, 14, 9, 'hello', 0, '2017-08-14 01:25:16');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `uri_segments`
+--
+
+CREATE TABLE `uri_segments` (
+  `id` int(11) NOT NULL,
+  `first` int(11) NOT NULL,
+  `second` int(11) NOT NULL,
+  `chat_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `uri_segments`
+--
+
+INSERT INTO `uri_segments` (`id`, `first`, `second`, `chat_id`, `created_at`) VALUES
+(8, 1, 5, 11, '2017-08-13 04:33:24'),
+(9, 1, 4, 12, '2017-08-13 04:42:42'),
+(10, 5, 4, 13, '2017-08-14 01:21:04'),
+(11, 9, 1, 14, '2017-08-14 01:24:51');
 
 -- --------------------------------------------------------
 
@@ -99,41 +140,23 @@ CREATE TABLE `users` (
   `first_name` text NOT NULL,
   `last_name` text NOT NULL,
   `division` varchar(100) NOT NULL,
-  `avatar` text
+  `avatar` text,
+  `is_logged_in` tinyint(1) NOT NULL,
+  `last_login` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `division`, `avatar`) VALUES
-(1, 'afiefsky', 'nothing', 'afiefsky@gmail.com', 'Muhammad Afief', 'Farista', '', ''),
-(4, 'tsabitkun', 'nothing', 'tsabitkun@gmail.com', 'Tsabit Abdul', 'Aziz', '', ''),
-(5, 'falon', 'nothing', 'falonvoa@gmail.com', '', '', '', ''),
-(6, 'havok', 'nothing', 'havok@gmail.com', 'Havok', 'Blaster', '', ''),
-(7, 'agus', 'nothing', 'agus', 'Agus', 'Mulyadi', 'Staff Dosen', NULL),
-(8, 'wan_gaazid', 'qwerty86', 'wanspartangaazid@gmail.com', 'wawan', 'setiawan', 'humas', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users_chats`
---
-
-CREATE TABLE `users_chats` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `chat_id` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `users_chats`
---
-
-INSERT INTO `users_chats` (`id`, `user_id`, `chat_id`, `created_at`) VALUES
-(1, 1, 3, '2017-08-02 02:43:49'),
-(2, 4, 4, '2017-08-02 02:43:49');
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `division`, `avatar`, `is_logged_in`, `last_login`) VALUES
+(1, 'afiefsky', 'nothing', 'afiefsky@gmail.com', 'Muhammad Afief', 'Farista', '', 'YO2jGz3.jpg', 1, '2017-08-13 17:00:00'),
+(4, 'tsabitkun', 'nothing', 'tsabitkun@gmail.com', 'Tsabit Abdul', 'Aziz', '', 'logo.png', 0, '2017-08-14 01:22:09'),
+(5, 'falon', 'nothing', 'falonvoa@gmail.com', 'Falon', 'Trecks', '', '167003.jpg', 1, '2017-08-13 17:00:00'),
+(6, 'havok', 'nothing', 'havok@gmail.com', 'Havok', 'Blaster', '', '', 0, '2017-08-13 04:47:02'),
+(7, 'agus', 'nothing', 'agus', 'Agus', 'Mulyadi', 'Staff Dosen', NULL, 0, '2017-08-13 04:47:02'),
+(8, 'wan_gaazid', 'qwerty86', 'wanspartangaazid@gmail.com', 'wawan', 'setiawan', 'humas', NULL, 0, '2017-08-13 04:47:02'),
+(9, 'setiawan', 'qwerty12345', 'setiawan@gmail.com', 'wawan', 'Setiawan', 'humas publikasi', 'IMG_20160109_120132_1_1.jpg', 0, '2017-08-14 01:32:31');
 
 --
 -- Indexes for dumped tables
@@ -146,9 +169,21 @@ ALTER TABLE `chats`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `chats_details`
+--
+ALTER TABLE `chats_details`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `chats_messages`
 --
 ALTER TABLE `chats_messages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `uri_segments`
+--
+ALTER TABLE `uri_segments`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -158,13 +193,6 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users_chats`
---
-ALTER TABLE `users_chats`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `user_id` (`user_id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -172,22 +200,27 @@ ALTER TABLE `users_chats`
 -- AUTO_INCREMENT for table `chats`
 --
 ALTER TABLE `chats`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT for table `chats_details`
+--
+ALTER TABLE `chats_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `chats_messages`
 --
 ALTER TABLE `chats_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=254;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+--
+-- AUTO_INCREMENT for table `uri_segments`
+--
+ALTER TABLE `uri_segments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT for table `users_chats`
---
-ALTER TABLE `users_chats`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

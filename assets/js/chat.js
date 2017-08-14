@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-    var count = 0;
-
     setInterval(function() {
         get_chats_messages();
     }, 2500);
@@ -21,6 +19,8 @@ $(document).ready(function() {
 
         var content = $("input#chat_message").val();
 
+        var userfile = $("input#userfile").val();
+
         if (content == "") return false;
 
         $.post(base_url + "index.php/chat/ajax_add_chat_message", { content: content, chat_id: chat_id, user_id: user_id }, function(data) {
@@ -31,6 +31,9 @@ $(document).ready(function() {
                 var current_content = $("div#chat_viewport").html();
 
                 $("div#chat_viewport").html(current_content + data.content);
+
+                /* Scroll each time you submit new message */
+                $('div#chat_viewport').scrollTop($('div#chat_viewport')[0].scrollHeight);
 
             } else {
                 /* Error here */
@@ -53,10 +56,12 @@ $(document).ready(function() {
                 var current_content = $("div#chat_viewport").html();
 
                 $("div#chat_viewport").html(current_content + data.content);
-
-                if (count < 1) {
+                
+                if (!data.content == '') {
+                    /* Scroll each time you get new message */
                     $('div#chat_viewport').scrollTop($('div#chat_viewport')[0].scrollHeight);
-                    count++;
+                } else {
+                    
                 }
                 
 

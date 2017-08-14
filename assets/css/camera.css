@@ -1,11 +1,24 @@
 #container {
     margin: 0px auto;
-    width: 500px;
-    height: 375px;
-    border: 10px #333 solid;
+    width: 320px;
+    height: 480px;
+    border: 3px #333 solid;
+    background-color: #666;
 }
-#videoElement {
-    width: 500px;
-    height: 375px;
+
+#localVideo {
+    width: 320px;
+    height: 240px;
+    background-color: #666;
+}
+
+.videoContainer {
+    width: 320px;
+    height: 240px;
+    background-color: #666;
+}
+.videoContainer video {
+    width: 320px;
+    height: 240px;
     background-color: #666;
 }

@@ -4,8 +4,8 @@ class Auth_model extends CI_Model
 {
     /**
      * Verify Method Description
-     * @param text $username 
-     * @param text $password 
+     * @param text $username
+     * @param text $password
      * @return boolean
      */
     public function verify($username, $password)
@@ -15,7 +15,11 @@ class Auth_model extends CI_Model
         $data = $verify->row_array();
 
         if ($verify->num_rows() > 0) {
-            $this->session->set_userdata([ 'user_id' => $data['id'] ]);
+            $this->session->set_userdata([
+                'user_id' => $data['id'],
+                'first_name' => $data['first_name'],
+                'avatar' => $data['avatar']
+            ]);
 
             return 1;
         } else {

@@ -4,7 +4,7 @@
   <title>Chat App</title>
 
   <!-- Ajax -->
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script type="text/javascript" src="<?php echo base_url() . 'assets/js/'; ?>jquery.min.js"></script>
 
   <!-- Chat js -->
   <script type="text/javascript" src="<?php echo base_url() . 'assets/js/'; ?>chat.js"></script>
@@ -26,13 +26,19 @@
   <!-- Camera CSS -->
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/camera.css">
 
-  <!-- Camera JS -->
-  <script src="<?php echo base_url() ?>assets/js/camera.js" type="text/javascript" charset="utf-8" async defer></script>
+  <!-- Simple WebRTC JS -->
+  <script src="<?php echo base_url() ?>assets/js/latest-v2.js"></script> 
+  
+  <!-- Bootstrap -->
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
 
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap-theme.min.css">
+
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 </head>
 <body>
-  <?php
-      echo $contents;
-  ?>
+    <?php
+        echo $contents;
+    ?>
 </body>
 </html>

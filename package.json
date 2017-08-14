@@ -1,0 +1,19 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "Chatting App using the WebRTC concept",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afiefsky/chatapp-with-codeigniter-ajax.git"
+  },
+  "author": "afiefsky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/afiefsky/chatapp-with-codeigniter-ajax/issues"
+  },
+  "homepage": "https://github.com/afiefsky/chatapp-with-codeigniter-ajax#readme"
+}

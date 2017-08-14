@@ -7,14 +7,20 @@ class Auth extends CI_Controller
     {
         parent::__construct();
 
-        $this->load->model('Auth_model');
+        $this->load->model(['Auth_model', 'User_model']);
 
         $this->auth = $this->Auth_model;
+        $this->user = $this->User_model;
     }
 
     public function index()
     {
         redirect('auth/login');
+    }
+
+    public function welcome()
+    {
+        $this->template->load('template/welcome_template', 'welcome/index');
     }
 
     public function login()
@@ -30,13 +36,51 @@ class Auth extends CI_Controller
             $verify = $this->auth->verify($username, $password);
 
             if ($verify == 1) {
-                redirect('chat/index');
+                /* Set session of status login if success */
+                $this->session->set_userdata('login_status', 'ok');
+
+                /* Update column = ['is_logged_in', 'last_login'] */
+                $this->user->logged($this->session->userdata('user_id'));
+
+                redirect('dashboard');
             } else {
+                /* Destory session if failed */
+                $this->session->sess_destroy();
                 echo "Login failed!!";
             }
+        } elseif (isset($_POST['submit_register'])) {
+            redirect('auth/register');
         } else {
-            $this->load->view('auth/index');
+            $this->template->load('template/login_template', 'auth/index');
+            // $this->load->view('auth/index');
+        }
+    }
+    
+    public function register()
+    {
+        if (isset($_POST['submit'])) {
+            $data['first_name'] = $this->input->post('first_name');
+            $data['last_name'] = $this->input->post('last_name');
+            $data['division'] = $this->input->post('division');
+            $data['email'] = $this->input->post('email');
+            $data['username'] = $this->input->post('username');
+            $data['password'] = $this->input->post('password');
+            
+            $this->db->insert('users', $data);
+
+            redirect('auth');
+        } else {
+            $this->template->load('template/login_template', 'register/index');
         }
     }
 
+    public function logout()
+    {
+        $this->db->where('id', $this->session->userdata('user_id'));
+        $this->db->update('users', ['is_logged_in' => 0]);
+
+        $this->session->sess_destroy();
+
+        redirect('auth/index');
+    }
 }

@@ -1,5 +1,3 @@
-server.listen(80);
-
 var selfEasyrtcid = "";
 
 

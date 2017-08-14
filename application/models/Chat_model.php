@@ -5,13 +5,26 @@ class Chat_model extends CI_Model
     /**
      * Chat_model Constructor
      * 
-     * chats = ['id', 'topic', 'created_by', 'created_at']
+     * chats = ['id', 'topic', 'user_id', 'created_at']
      * chats_messages = ['id', 'chat_id', 'user_id', 'content', 'created_at']
      * created_at auto timestamp (currentdate)
      */
     public function __construct()
     {
         parent::__construct();
+    }
+
+    public function create($first_id, $second_id)
+    {
+        $data['topic'] = $first_id . $second_id;
+
+        $chat = $this->db->insert('chats', $data);
+
+        if ($chat) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     /**
@@ -35,6 +48,7 @@ class Chat_model extends CI_Model
                     cm.user_id,
                     cm.content,
                     DATE_FORMAT(cm.created_at, '%D of %M %Y at %H:%i:%s') AS timestamp,
+                    cm.is_image,
                     u.username,
                     u.first_name,
                     u.last_name
@@ -56,4 +70,23 @@ class Chat_model extends CI_Model
 
         return $result;
     }
+
+    public function getOne($id)
+    {
+        return $this->db->get_where('chats', ['id' => $id]);
+    }
+
+    public function get()
+    {
+        $this->db->select('chats.*, users.username');
+        $this->db->from('chats as chats, users as users');
+        $this->db->where('chats.user_id = users.id');
+        return $this->db->get();
+    }
+
+    public function obtain($topic)
+    {
+        return $this->db->get_where('chats', ['topic' => $topic]);
+    }
+
 }

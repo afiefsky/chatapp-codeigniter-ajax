@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>E-OFFICE POS INDONESIA</title>
+    <title>Post Chat</title>
     
     <script type="text/javascript" src="<?php echo base_url() . 'assets/js/'; ?>jquery.min.js"></script>
 
@@ -26,8 +26,16 @@
     
     <!-- Camera CSS -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/camera.css">
+    
+    <?php
+    if ($this->session->userdata('role') == 1) {
+        $link = 'assets/css/chat.css';
+      } else {
+        $link = 'assets/css/chat_admin.css';
+      }
+    ?>
 
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/chat.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url() . $link; ?>">
 
     <script type="text/javascript">
       var base_url = "<?php echo base_url(); ?>";
@@ -35,9 +43,9 @@
     <!-- End declaration -->
 
     <!-- Bootstrap core CSS -->
-    <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet">
     <!-- Bootstrap theme -->
-    <link href="<?php echo base_url(); ?>assets/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/css/bootstrap-theme.css" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="<?php echo base_url(); ?>assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
@@ -71,15 +79,29 @@
             <img src="<?php echo base_url(); ?>assets/images/logo.png" height="30" width="45" />
           </a>
           <a class="navbar-brand" href="<?php echo base_url(); ?>index.php/dashboard">
-            E-OFFICE POS INDONESIA
+            Post Chat
           </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <!-- <li><?php echo anchor('dashboard', 'Kontak'); ?></li> -->
-            <!-- <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li> -->
-            
+            <li>
+            <?php
+            if ($this->session->userdata('role') == 1) {
+              echo anchor('magazine', 'Sticky Notes');
+            } else {
+              
+            }
+            ?>
+            </li>
+            <li>
+            <?php
+            if ($this->session->userdata('role') == 1) {
+              echo anchor('chat/group', 'Chat Grup');
+            } else {
+              
+            }
+            ?>
+            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">

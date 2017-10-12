@@ -14,6 +14,24 @@ class User extends CI_Controller
         redirect('user/setting');
     }
 
+    public function activate()
+    {
+        $id = $this->uri->segment(3);
+
+        $this->db->where('id', $id);
+        $this->db->update('users', ['is_activated' => '1']);
+        redirect('dashboard');
+    }
+
+    public function add()
+    {
+        if (isset($_POST['submit'])) {
+            echo 1;
+        } else {
+            $this->template->load('template/main_template', 'user/add');
+        }
+    }
+
     public function setting()
     {
         $id = $this->uri->segment(3);

@@ -71,7 +71,7 @@
             <img src="<?php echo base_url(); ?>assets/images/logo.png" height="30" width="45" />
           </a>
           <a class="navbar-brand">
-            E-OFFICE POS INDONESIA
+            Post Chat
           </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">

@@ -43,15 +43,21 @@ class Auth extends CI_Controller
                 $this->user->logged($this->session->userdata('user_id'));
 
                 redirect('dashboard');
+            } elseif ($verify == 2) {
+                $this->session->set_userdata('error', 'Silahkan minta admin untuk memberikan verifikasi terhadap akun anda!');
+                redirect('auth/login');
             } else {
                 /* Destory session if failed */
-                $this->session->sess_destroy();
-                echo "Login failed!!";
+                // $this->session->sess_destroy();
+                $this->session->set_userdata(['error' => 'Error!! Username dan password tidak valid!!']);
+                redirect('auth/login');
             }
         } elseif (isset($_POST['submit_register'])) {
             redirect('auth/register');
         } else {
-            $this->template->load('template/login_template', 'auth/index');
+            $data['error'] = $this->session->userdata('error');
+
+            $this->template->load('template/login_template', 'auth/index', $data);
             // $this->load->view('auth/index');
         }
     }

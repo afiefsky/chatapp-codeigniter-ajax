@@ -49,6 +49,7 @@ class Chat_model extends CI_Model
                     cm.content,
                     DATE_FORMAT(cm.created_at, '%D of %M %Y at %H:%i:%s') AS timestamp,
                     cm.is_image,
+                    cm.is_doc,
                     u.username,
                     u.first_name,
                     u.last_name

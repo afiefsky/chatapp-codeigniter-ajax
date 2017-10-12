@@ -51,7 +51,7 @@
               class="btn btn-danger btn-sm" />';
         }
       ?>
-      <input type="submit" name="submit" value="Kirim Gambar" class="btn btn-success btn-sm" />
+      <input type="submit" name="submit" value="Upload" class="btn btn-success btn-sm" />
       <input type="file" name="userfile" class="form-control"/>
       <?php echo form_close(); ?>
     </td>

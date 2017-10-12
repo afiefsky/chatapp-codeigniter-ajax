@@ -10,10 +10,21 @@ class Chat extends CI_Controller
     {
         parent::__construct();
 
-        $this->load->model(['Chat_model', 'Segment_model']);
+        $this->load->model(['Chat_model', 'Segment_model', 'User_model', 'Group_model']);
         $this->chat = $this->Chat_model;
         $this->segment = $this->Segment_model;
+        $this->user = $this->User_model;
+        $this->group = $this->Group_model;
     }
+
+    public function group()
+    {
+        /* Get all chatroom of group*/
+        $data['record'] = $this->group->all();
+
+        $this->template->load('template/main_template', 'chat/group/index', $data);
+    }
+
 
     /**
      * Chat Index
@@ -28,14 +39,33 @@ class Chat extends CI_Controller
         if (isset($_POST['submit'])) {
             $id = $this->uri->segment(3);
             $config['upload_path']          = './uploads/';
-            $config['allowed_types']        = 'gif|jpg|png';
+            $config['allowed_types']        = 'gif|jpg|png|pdf|docx|doc|sql|xlsx|xls|ppt|pptx';
 
             $this->load->library('upload', $config);
 
             if (!$this->upload->do_upload('userfile')) {
+                die();
                 redirect('chat/index/'.$id);
             } else {
                 $data = array('upload_data' => $this->upload->data());
+
+                $file_ext = $data['upload_data']['file_ext'];
+
+                if ($file_ext == '.docx' ||
+                    $file_ext == '.doc' ||
+                    $file_ext == '.pdf' ||
+                    $file_ext == '.xls' ||
+                    $file_ext == '.xlsx' ||
+                    $file_ext == '.ppt' ||
+                    $file_ext == '.pptx')
+                {
+                    $is_image = '0';
+                    $is_doc = '1';
+                } else {
+                    $is_image = '1';
+                    $is_doc = '0';
+                }
+
 
                 $chat_id = $this->uri->segment(3);
                 $user_id = $this->session->userdata('user_id');
@@ -45,7 +75,8 @@ class Chat extends CI_Controller
                     'chat_id' => $chat_id,
                     'user_id' => $user_id,
                     'content' => $content,
-                    'is_image' => 1
+                    'is_image' => $is_image,
+                    'is_doc' => $is_doc
                 ];
 
                 $this->db->insert('chats_messages', $data);
@@ -234,8 +265,23 @@ class Chat extends CI_Controller
                 $li_class = ($this->session->userdata('user_id') == $chats_messages->user_id) ?
                     'class="by_current_user"' : '';
 
-                if ($chats_messages->is_image == 0) {
-                    $chats_messages_html .= '<p>
+                if ($chats_messages->is_image == '0') {
+                    if ($chats_messages->is_doc == '1') {
+                        $chats_messages_html .=
+                        '<p><li ' . $li_class . '>'
+                            . '<p class="message_content"><img src="'.base_url().'uploads/avatars/'.$avatar.'" height="25" width="25">
+                                <a href="'.base_url().'uploads/'.$chats_messages->content.'" target="_BLANK">
+                                    '.$chats_messages->content.'
+                                </a>
+                            </p>
+                            <span class="chat_message_header"><b>' .
+                                $chats_messages->timestamp .
+                                ' by ' .
+                                $chats_messages->username .
+                            '</b></span>
+                        </li></p>';
+                    } else {
+                        $chats_messages_html .= '<p>
                         <li ' . $li_class . '>'
                         .'<p class="message_content"><img src="'.base_url().'uploads/avatars/'.$avatar.'" height="25" width="25"> '
                         . $chats_messages->content
@@ -245,6 +291,7 @@ class Chat extends CI_Controller
                         . ' by '
                         . $chats_messages->username
                         . '</b></span></li></p>';
+                    }
                 } else {
                     $chats_messages_html .=
                         '<p><li ' . $li_class . '>'

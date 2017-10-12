@@ -33,6 +33,8 @@
         </tr>";
     }
     ?>
-    </tbody>
+  </tbody>
 </table>
 </p>
+
+<script src="<?php echo base_url(); ?>js/dashboard.js" type="text/javascript"></script>

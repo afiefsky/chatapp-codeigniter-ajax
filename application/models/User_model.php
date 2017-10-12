@@ -12,6 +12,7 @@ class User_model extends CI_Model
         $this->db->select();
         $this->db->from('users as users');
         $this->db->where('users.id != ', $user_id);
+        $this->db->where('users.id != 0');
         return $this->db->get();
     }
 

@@ -2,9 +2,9 @@ div#chat_viewport {
   font-family: Verdana, Arial, sans-serif;
   padding: 20px;
   border-top: 2px dashed #585858;
-  min-height: 500px;
+  min-height: 390px;
   color: black;
-  max-height: 400px;
+  max-height: 280px;
   overflow: auto;
   margin-bottom: 10px;
   width: 750px;
@@ -59,7 +59,7 @@ div#chat_viewport ul li.by_current_user span.chat_message_header {
 div#container {
     margin: 0px auto;
     width: 327.5px;
-    height: 480px;
+    height: 400px;
     border: 3px #333 solid;
     background-color: #666;
 }
